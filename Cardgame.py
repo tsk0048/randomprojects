@@ -22,6 +22,10 @@ def player_hand():
     print("The sum of your cards is " + str(sum1) + '.')
     return
 
+# Initial sum of cards
+def initial_sum():
+    return cards[0] + cards[1] + cards[2]
+
 # Action is unique to players.
 def p_hit():
     return cards[10] + cards[0] + cards[1] + cards[2]
@@ -44,12 +48,12 @@ def dealer_hand():
 def game():
     print("Welcome. Try to get the sum of your cards to 21")
     player_hand()
-    if cards[0] + cards[1] + cards[2] > 21:
-        print('Game over.')
+    if initial_sum() > 21:
+        print('Its a bust! Game over.')
         dealer_hand()
 
 
-    elif cards[0] + cards[1] + cards[2] == 21:
+    elif initial_sum() == 21:
         print('You win!')
         dealer_hand()
 
