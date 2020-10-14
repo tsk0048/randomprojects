@@ -1,4 +1,5 @@
-import random
+from random import shuffle
+from time import sleep
 
 # 21 game. It takes 1 player and 1 dealer. they each get 3 cards. the sum of the 3 cards is checked to see =21
 # Player is able to hit (gain another card if the original card sum way less than 21) or stay (close to 21)
@@ -8,7 +9,7 @@ import random
 # Deck. Numeric only, for now.
 cards = []
 for i in range(2, 14):
-    random.shuffle(cards)
+    shuffle(cards)
     cards.append(i)
 
 
@@ -49,11 +50,13 @@ def game():
     print("Welcome. Try to get the sum of your cards to 21")
     player_hand()
     if initial_sum() > 21:
+        sleep(2.5)
         print('Its a bust! Game over.')
         dealer_hand()
 
 
     elif initial_sum() == 21:
+        sleep(2.5)
         print('You win!')
         dealer_hand()
 
@@ -64,14 +67,18 @@ def game():
         if a == 'hit':
             print('The new card is: ' + str(cards[10]))
             print('The new sum is: ' + str(p_hit()))
+            sleep(2.5)
             if p_hit() > 21:
                 print('Its a bust! Game over.')
                 dealer_hand()
+            elif p_hit() < 21:
+                print('Would you like to hit again or fold')
             elif p_hit() == 21:
                 print('You win!')
                 dealer_hand()
 
         else:
+            sleep(3)
             print('Game over.')
             return dealer_hand()
 
