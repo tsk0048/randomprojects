@@ -47,45 +47,64 @@ def dealer_hand():
 # Game state. Contains the logic/flowchart of the game
 
 def game():
-    print("Welcome. Try to get the sum of your cards to 21")
-    player_hand()
-    if initial_sum() > 21:
-        sleep(2.5)
-        print('Its a bust! Game over.')
-        dealer_hand()
-
-
-    elif initial_sum() == 21:
-        sleep(2.5)
-        print('You win!')
-        dealer_hand()
-
-
-    else:
-        a = input("Would you like to hit or fold?")
-
-        if a == 'hit':
-            print('The new card is: ' + str(cards[10]))
-            print('The new sum is: ' + str(p_hit()))
+    while True:
+        print("Welcome. Try to get the sum of your cards to 21")
+        player_hand()
+        if initial_sum() > 21:
             sleep(2.5)
-            if p_hit() > 21:
-                print('Its a bust! Game over.')
-                dealer_hand()
+            print('Its a bust! Game over.')
+            dealer_hand()
+            if input('Would you like to play again?') in ('Yes' , 'y' , 'yes'):
+                return game()
+            else:
+                break
+
+
+        elif initial_sum() == 21:
+            sleep(2.5)
+            print('You win!')
+            dealer_hand()
+            if input('Would you like to play again?') in ('Yes' , 'y' , 'yes'):
+                return game()
+            else:
+                break
+
+
+
+        else:
+            a = input("Would you like to hit or fold?")
+
+            if a == 'hit':
+                print('The new card is: ' + str(cards[10]))
+                print('The new sum is: ' + str(p_hit()))
+                sleep(2.5)
+                if p_hit() > 21:
+                    print('Its a bust! Game over.')
+                    dealer_hand()
+                    if input('Would you like to play again?') in ('Yes', 'y', 'yes'):
+                        return game()
+                    else:
+                        break
             elif p_hit() < 21:
-                print('Would you like to hit again or fold')
+                if input('Would you like to hit') == 'Yes':
+                    return p_hit()
+                if input('Would you like to fold') == 'No':
+                    return game()
+
             elif p_hit() == 21:
                 print('You win!')
                 dealer_hand()
+                if input('Would you like to play again?') in ('Yes', 'y', 'yes'):
+                    return game()
+                else:
+                    break
 
-        else:
-            sleep(3)
-            print('Game over.')
-            return dealer_hand()
-
-
+            else:
+                sleep(3)
+                print('Game over.')
+                return dealer_hand()
+            if input('Would you like to play again?') in ('Yes', 'y', 'yes'):
+                return game()
+            else:
+                break
 game()
-
-
-#TEST 2
-#DID IT WORK?
-#bepis
