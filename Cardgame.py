@@ -8,14 +8,20 @@ from time import sleep
 
 # Deck. Numeric only, for now.
 # This branch will try out randint instead of actual cards
-p_card1 = random.randint(2, 14)
-p_card2 = random.randint(2, 14)
-p_card3 = random.randint(2, 14)
+player_card = {"p_card1":1, "p_card2":1, "p_card3":1}
+def shuffle():
+    a = random.randint(2,14)
+    b = random.randint(2,14)
+    c = random.randint(2,14)
+    return player_card.update({"p_card1":a}) , player_card.update({"p_card2":b}) , player_card.update({"p_card3":c})
 
 # Player hand. Contains the cards as well as unique actions for the player.
 def player_hand():
-    print('For this round, your cards are: {}, {}, {} .'.format(p_card1, p_card2, p_card3))
-    sum1 = p_card1 + p_card2 + p_card3
+    card_1 = player_card.get("p_card1")
+    card_2 = player_card.get("p_card2")
+    card_3 = player_card.get("p_card3")
+    print('For this round, your cards are: {}, {}, {} .'.format(card_1, card_2, card_3))
+    sum1 = card_1 + card_2 + card_3
     print("The sum of your cards is " + str(sum1) + '.')
     return
 
@@ -83,7 +89,7 @@ def game():
                     else:
                         break
             elif p_hit() < 21:
-                if input('Would you like to hit') == 'Yes':
+                if input('Would you like to hit ') == 'Yes':
                     return p_hit()
                 if input('Would you like to fold') == 'No':
                     return game()
